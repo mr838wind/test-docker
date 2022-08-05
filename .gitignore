@@ -2,7 +2,7 @@
 ### custom ###
 /logs/
 docs/docker/30-server/tomcat-webapps/
-!docs/docker/30-server/tomcat-webapps/.gitkeep
+!**/.gitkeep
 
 
 ### default
