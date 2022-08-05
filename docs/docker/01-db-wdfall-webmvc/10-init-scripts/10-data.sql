@@ -1,0 +1,1 @@
+INSERT INTO tb_board (seq, board_code, category, title, contents, view_count, author, passwd, register_dtm, update_dtm) VALUES (1, 'free', 'a', 'hello', 'hello', 56, 'auther', '1234', '2022-07-29 04:14:00', '2022-07-29 04:14:00');

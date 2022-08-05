@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+
+  server_web:
+    image: nginx:1.19
+    restart: always
+    container_name: docker_sample_web
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-conf.d:/etc/nginx/conf.d
+      - ./nginx-html:/usr/share/nginx/html
+
+  server_was:
+    image: tomcat:9.0.65-jre11
+    restart: always
+    container_name: docker_sample_was
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - "18080:8080"
+    volumes:
+      - ./tomcat-webapps:/usr/local/tomcat/webapps
+
+networks:
+  default:
+    external:
+      name: docker_sample_network

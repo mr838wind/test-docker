@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: docker_sample_db
+    ## auto creating user,password,database schema
+    environment:
+      MYSQL_ROOT_PASSWORD: admin!32
+      MYSQL_USER: wdfall
+      MYSQL_PASSWORD: admin!32
+      MYSQL_DATABASE: wdfall_webmvc
+    ports:
+      - 3306:3306
+    ## init db: note that sql files runs in ascending order
+    volumes:
+        - "./10-init-scripts:/docker-entrypoint-initdb.d"
+
+
+
+## >>== admin tools in web page
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 8080:8080
+
+networks:
+    default:
+        external:
+            name: docker_sample_network
