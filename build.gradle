@@ -53,7 +53,7 @@ tasks.named('test') {
 
 
 /*
-docker-build-setting:
+ [bootBuildImage]
  */
 def docker_id = "mr838wind"
 def docker_token = "dckr_pat_n1VDrHfWBgnsY33hcyus7dwZqGA"
