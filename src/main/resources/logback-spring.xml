@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://logback.qos.ch/manual/index.html -->
+
+<!-- 30초마다 설정 파일의 변경을 확인한다. 파일이 변경되면 다시 로딩한다 -->
+<configuration debug="true" scan="false" scanPeriod="30 seconds">
+
+    <property name="LOG_DIR" value="logs" />
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+    <property name="PROJECT_BASE_PACKAGE" value="com.example.testsetting" />
+
+
+    <!-- ###### appeder ###### -->
+    <!--  console -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                ${LOG_PATTERN}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!--  file -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/api-backoffice.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/api-backoffice.log.%i</fileNamePattern>
+            <minIndex>0</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="error">
+        <appender-ref ref="console" />
+        <!--<appender-ref ref="file" />-->
+    </root>
+
+    <!-- LOCAL -->
+    <springProfile name="local">
+        <logger name="${PROJECT_BASE_PACKAGE}" level="DEBUG" additivity="false" >
+            <appender-ref ref="console" />
+            <!--<appender-ref ref="file" />-->
+        </logger>
+
+        <!-- log4jdbc -->
+        <logger name="jdbc" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.sqltiming" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.audit" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultset" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.connection" level="OFF" appender-ref="console"/>
+    </springProfile>
+
+    <!-- DEVELOP -->
+    <springProfile name="dev">
+        <logger name="${PROJECT_BASE_PACKAGE}" level="DEBUG" additivity="false" >
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </logger>
+
+        <!-- log4jdbc -->
+        <logger name="jdbc" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.sqltiming" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.audit" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultset" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.connection" level="OFF" appender-ref="console"/>
+    </springProfile>
+
+    <!-- docker -->
+    <springProfile name="docker">
+        <logger name="${PROJECT_BASE_PACKAGE}" level="DEBUG" additivity="false" >
+            <appender-ref ref="console" />
+        </logger>
+
+        <!-- log4jdbc -->
+        <logger name="jdbc" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.sqltiming" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.audit" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultset" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.connection" level="OFF" appender-ref="console"/>
+    </springProfile>
+
+    <!-- STAGING -->
+    <springProfile name="stag">
+        <logger name="${PROJECT_BASE_PACKAGE}" level="info" additivity="false" >
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </logger>
+
+        <!-- log4jdbc -->
+        <logger name="jdbc" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.sqltiming" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.audit" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultset" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console"/>
+        <logger name="jdbc.connection" level="OFF" appender-ref="console"/>
+
+    </springProfile>
+
+    <!-- PRODUCT -->
+    <springProfile name="prod">
+        <logger name="${PROJECT_BASE_PACKAGE}" level="error" additivity="false" >
+            <appender-ref ref="console" />
+            <appender-ref ref="file" />
+        </logger>
+
+        <!-- log4jdbc -->
+        <logger name="jdbc" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.sqlonly" level="ERROR" appender-ref="console"/>
+        <logger name="jdbc.sqltiming" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.audit" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultset" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.resultsettable" level="OFF" appender-ref="console"/>
+        <logger name="jdbc.connection" level="ERROR" appender-ref="console"/>
+    </springProfile>
+
+
+</configuration>
