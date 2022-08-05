@@ -1,8 +1,7 @@
 
 ### custom ###
 /logs/
-docs/docker/30-server/tomcat-webapps/ROOT.war
-docs/docker/30-server/tomcat-webapps/ROOT
+docs/docker/30-server/tomcat-webapps/
 !docs/docker/30-server/tomcat-webapps/.gitkeep
 
 

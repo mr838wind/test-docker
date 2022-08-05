@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+
+  server_web_2:
+    image: nginx:1.19
+    restart: always
+    container_name: docker_sample_web_2
+    environment:
+      - TZ=Asia/Seoul
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-conf.d:/etc/nginx/conf.d
+      - ./nginx-html:/usr/share/nginx/html
+
+  server_was_2:
+    image: mr838wind/test-docker:latest
+    restart: always
+    container_name: docker_sample_was_2
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "17300:7300"
+#    volumes:
+
+networks:
+  default:
+    external:
+      name: docker_sample_network
