@@ -10,7 +10,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 //== [s] [war packaging]
-bootWar.archiveName("ROOT.war")
+bootWar.archiveName("BOOT_ROOT.war")
 war.archiveName("ROOT.war")
 //== [e] [war packaging]
 

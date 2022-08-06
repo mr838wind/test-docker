@@ -60,8 +60,7 @@
 ## setting: db
 
 ## setting: nginx, tomcat
-* build 시 spring.profiles.active 를 docker 로 바꾸고 gradle: build task 실행
-* build/libs/ROOT.war 를 배포
+
 
 ## build: spring boot docker build 
 
